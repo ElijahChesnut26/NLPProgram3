@@ -7,6 +7,7 @@ import numpy as np
 from itertools import combinations
 import matplotlib.pyplot as plt
 import random
+import pandas as pd
 
 #function gets the vector for a word in a sentence
 def get_word_vec(word, sentence, tokenizer):
@@ -20,7 +21,7 @@ def get_word_vec(word, sentence, tokenizer):
     word_idx = tokenizer.convert_ids_to_tokens(inputs["input_ids"][0]).index(word)
     
     # Get the vector for the target word
-    word_vector = hidden_states[word_idx]#can add [:50] to limit the size of the vector
+    word_vector = hidden_states[word_idx][:50]#can add [:50] to limit the size of the vector
     return word_vector
 
 
@@ -82,6 +83,8 @@ def get_df_of_word():
     ot_labels = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                  2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
     
+    x = pd.DataFrame(word_vectors)
+    print(x.info)
     
     pass
 
