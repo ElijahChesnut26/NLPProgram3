@@ -8,6 +8,7 @@ from itertools import combinations
 import matplotlib.pyplot as plt
 import random
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 #function gets the vector for a word in a sentence
 def get_word_vec(word, sentence, tokenizer):
@@ -80,11 +81,14 @@ def get_df_of_word():
         ]
     word_vectors = [get_word_vec("overtime", sentence, tokenizer) for sentence in overtime_sentences]
     # print(word_vectors[0])
-    ot_labels = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+    labels = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                  2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
     
     x = pd.DataFrame(word_vectors)
-    print(x.info)
+    # print(x.info)
+    x = x.to_numpy()
+    X_train, X_test, y_train, y_test = train_test_split(x, labels, test_size=0.2, random_state=1)
+    
     
     pass
 
